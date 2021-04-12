@@ -3,24 +3,29 @@
 // (no lines with multiple semicolons necessary!)
 // Execute `rustlings hint move_semantics3` for hints :)
 
-// I AM NOT DONE
-
-fn main() {
-    let vec0 = Vec::new();
-
-    let mut vec1 = fill_vec(vec0);
-
-    println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
-
-    vec1.push(88);
-
-    println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
+trait Fill {
+    fn fill_vec(&mut self);
 }
 
-fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
+impl Fill for Vec<u64> {
+    fn fill_vec(&mut self) {
+        self.push(22);
+        self.push(44);
+        self.push(66);
+    }
+}
+fn main() {
+    let mut vec0 = Vec::<u64>::new();
+
+    vec0.fill_vec();
+    println!("{} has length {} content `{:?}`", "vec0", vec0.len(), vec0);
+
+    vec0.push(88);
+    println!("{} has length {} content `{:?}`", "vec0", vec0.len(), vec0);
+}
+
+fn fill_vec(vec: &mut Vec<i32>) {
     vec.push(22);
     vec.push(44);
     vec.push(66);
-
-    vec
 }
